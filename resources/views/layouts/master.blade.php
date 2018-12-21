@@ -12,9 +12,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>AdminLTE 3 | Starter</title>
-
-  <!-- Font Awesome Icons -->
-
   <link rel="stylesheet" href="/css/app.css">
  
 </head>
@@ -86,32 +83,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
 
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              {{-- <i class="nav-icon fa fa-dashboard"></i> --}}
-              <i class="nav-icon fas fa-cog green"></i>
+          <li class="nav-item">
+            <router-link to="/users" href="#" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
               <p>
-                Managment
-                <i class="right fa fa-angle-left"></i>
+                Users
               </p>
-            </a>
-
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
-            </ul>
+            </router-link>
           </li>
+
+
+
+            
 
           <li class="nav-item">
             <router-link to="/profile" href="#" class="nav-link">
@@ -123,12 +106,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
-            {{-- <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-power-off"></i>
-              <p>
-                Logout
-              </p>
-            </a> --}}
 
             <a class="nav-link" href="{{ route('logout') }}"
 

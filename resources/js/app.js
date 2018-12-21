@@ -12,13 +12,15 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 import dashboardPage from './components/dashboard.vue'
 import profilePage from './components/profile.vue'
+import usersPage from './components/users.vue'
 
 Vue.use(VueRouter)
 
 
 let routes = [
   { path: '/dashboard', component: dashboardPage },
-  { path: '/profile', component: profilePage }
+  { path: '/profile', component: profilePage },
+  { path: '/users', component: usersPage }
 ]
 
 const router = new VueRouter({

@@ -140,6 +140,13 @@
                   .then(({ data }) => { console.log(data) })
 
                 this.$Progress.finish()
+
+                $('#exampleModal').modal('hide')
+
+                toast({
+                    type: 'success',
+                    title: 'User Added successfully'
+                  })
           },
           allUsers(){
             axios.get('api/user').then( ({data}) =>  (this.users = data.data) );

@@ -55,6 +55,18 @@ Vue.use(VueProgressBar, {
 })
 
 
+import Swal from 'sweetalert2'
+
+const toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000
+});
+
+window.toast = toast;
+window.Swal = Swal;
+
 
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the

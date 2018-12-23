@@ -10,6 +10,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import { Form, HasError, AlertError } from 'vform'
+import moment from 'moment'
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -32,6 +33,17 @@ let routes = [
 const router = new VueRouter({
 	mode: 'history',
   routes // short for `routes: routes`
+})
+
+Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
+Vue.filter('formate', function (value) {
+  if (!value) return ''
+  return moment(value).format("MMM Do YY");
 })
 
 // 4. Create and mount the root instance.

@@ -18,13 +18,15 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Type</th>
+                    <th>Registered At</th>
                     <th>Modify</th>
                   </tr>
                   <tr v-for="user in users" :key='user.id'>
                     <td>{{user.id}}</td>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
-                    <td>{{user.type}}</td>
+                    <td>{{user.type | capitalize }}</td>
+                    <td>{{user.created_at | formate }}</td>
                     <td>
                         <a href="#">
                             <i class="fa fa-edit blue"></i>

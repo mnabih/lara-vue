@@ -9,6 +9,12 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import { Form, HasError, AlertError } from 'vform'
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+window.Form = Form; // now we can access form from other component using this var
+
 import VueRouter from 'vue-router'
 import dashboardPage from './components/dashboard.vue'
 import profilePage from './components/profile.vue'

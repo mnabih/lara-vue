@@ -137,19 +137,29 @@
 
                 this.$Progress.start()
                 this.form.post('api/user') // route name in api routes
-                  .then(({ data }) => { console.log(data) })
+                   
+                   // if validation success
+                  .then( () => { 
+                      this.$Progress.finish()
+                      toast({
+                          type: 'success',
+                          title: 'User Added successfully'
+                        })
 
-                this.$Progress.finish()
+                      $('#exampleModal').modal('hide')
+                      Fire.$emit('afterCreate');
 
+                      // mine
+                      //this.allUsers() // it works put Events are good for informing other components﻿
 
-                toast({
-                    type: 'success',
-                    title: 'User Added successfully'
-                  })
+                     })
 
-                $('#exampleModal').modal('hide')
+                      // if erorrs
+                    .catch( () => { 
 
-                Fire.$emit('afterCreate');
+                    })
+
+                
           },
           allUsers(){
             axios.get('api/user').then( ({data}) =>  (this.users = data.data) );

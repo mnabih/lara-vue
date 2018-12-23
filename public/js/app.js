@@ -2020,37 +2020,41 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addUser: function addUser() {
+      var _this = this;
+
       // Submit the form via a POST request
       this.$Progress.start();
       this.form.post('api/user') // route name in api routes
-      .then(function (_ref) {
-        var data = _ref.data;
-        console.log(data);
-      });
-      this.$Progress.finish();
-      toast({
-        type: 'success',
-        title: 'User Added successfully'
-      });
-      $('#exampleModal').modal('hide');
-      Fire.$emit('afterCreate');
+      // if validation success
+      .then(function () {
+        _this.$Progress.finish();
+
+        toast({
+          type: 'success',
+          title: 'User Added successfully'
+        });
+        $('#exampleModal').modal('hide');
+        Fire.$emit('afterCreate'); // mine
+        //this.allUsers() // it works put Events are good for informing other components﻿
+      }) // if erorrs
+      .catch(function () {});
     },
     allUsers: function allUsers() {
-      var _this = this;
+      var _this2 = this;
 
-      axios.get('api/user').then(function (_ref2) {
-        var data = _ref2.data;
-        return _this.users = data.data;
+      axios.get('api/user').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.users = data.data;
       });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.allUsers(); //setInterval(()=>this.allUsers(), 3000); //send request every 3 secounds
 
     Fire.$on('afterCreate', function () {
-      _this2.allUsers();
+      _this3.allUsers();
     });
   }
 });

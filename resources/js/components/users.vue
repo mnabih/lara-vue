@@ -155,6 +155,7 @@
         },        
         created(){
           this.allUsers();
+          setInterval(()=>this.allUsers(), 3000); //send request every 3 secounds
         },
     }
 </script>

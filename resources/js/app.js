@@ -67,6 +67,8 @@ const toast = Swal.mixin({
 window.toast = toast;
 window.Swal = Swal;
 
+window.Fire = new Vue();
+
 
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the

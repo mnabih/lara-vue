@@ -141,12 +141,15 @@
 
                 this.$Progress.finish()
 
-                $('#exampleModal').modal('hide')
 
                 toast({
                     type: 'success',
                     title: 'User Added successfully'
                   })
+
+                $('#exampleModal').modal('hide')
+
+                Fire.$emit('afterCreate');
           },
           allUsers(){
             axios.get('api/user').then( ({data}) =>  (this.users = data.data) );
@@ -155,7 +158,9 @@
         },        
         created(){
           this.allUsers();
-          setInterval(()=>this.allUsers(), 3000); //send request every 3 secounds
+          //setInterval(()=>this.allUsers(), 3000); //send request every 3 secounds
+
+          Fire.$on('afterCreate',() => {this.allUsers()})
         },
     }
 </script>

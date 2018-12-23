@@ -2028,11 +2028,12 @@ __webpack_require__.r(__webpack_exports__);
         console.log(data);
       });
       this.$Progress.finish();
-      $('#exampleModal').modal('hide');
       toast({
         type: 'success',
         title: 'User Added successfully'
       });
+      $('#exampleModal').modal('hide');
+      Fire.$emit('afterCreate');
     },
     allUsers: function allUsers() {
       var _this = this;
@@ -2046,10 +2047,11 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this2 = this;
 
-    this.allUsers();
-    setInterval(function () {
-      return _this2.allUsers();
-    }, 3000); //send request every 3 secounds
+    this.allUsers(); //setInterval(()=>this.allUsers(), 3000); //send request every 3 secounds
+
+    Fire.$on('afterCreate', function () {
+      _this2.allUsers();
+    });
   }
 });
 
@@ -72148,7 +72150,8 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.mixin({
   timer: 3000
 });
 window.toast = toast;
-window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a; // 4. Create and mount the root instance.
+window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a;
+window.Fire = new Vue(); // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.
 // const app = new Vue({

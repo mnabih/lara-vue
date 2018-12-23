@@ -2018,7 +2018,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     addUser: function addUser() {
       // Submit the form via a POST request
-      this.form.post('').then(function (_ref) {
+      this.form.post('api/user') // route name in api routes
+      .then(function (_ref) {
         var data = _ref.data;
         console.log(data);
       });
@@ -37822,30 +37823,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.bio,
-                              expression: "form.bio"
+                              value: _vm.form.pio,
+                              expression: "form.pio"
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("bio") },
+                          class: { "is-invalid": _vm.form.errors.has("pio") },
                           attrs: {
                             type: "text",
-                            name: "bio",
-                            placeholder: "short bio for user(optional)"
+                            name: "pio",
+                            placeholder: "short pio for user(optional)"
                           },
-                          domProps: { value: _vm.form.bio },
+                          domProps: { value: _vm.form.pio },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.form, "bio", $event.target.value)
+                              _vm.$set(_vm.form, "pio", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "bio" }
+                          attrs: { form: _vm.form, field: "pio" }
                         })
                       ],
                       1
@@ -38087,7 +38088,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
         [_vm._v("Save changes")]
       )
     ])

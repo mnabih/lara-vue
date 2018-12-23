@@ -76,10 +76,10 @@
                     </div>
                     
                     <div class="form-group">
-                      <textarea v-model="form.bio" type="text" name="bio"
-                        placeholder="short bio for user(optional)"
-                        class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
-                      <has-error :form="form" field="bio"></has-error>
+                      <textarea v-model="form.pio" type="text" name="pio"
+                        placeholder="short pio for user(optional)"
+                        class="form-control" :class="{ 'is-invalid': form.errors.has('pio') }"></textarea>
+                      <has-error :form="form" field="pio"></has-error>
                     </div>
                     
                     <div class="form-group">
@@ -103,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
               </form>
             </div>
@@ -131,7 +131,7 @@
         methods:{
           addUser(){
             // Submit the form via a POST request
-                this.form.post('')
+                this.form.post('api/user') // route name in api routes
                   .then(({ data }) => { console.log(data) })
           }
         },

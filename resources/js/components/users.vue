@@ -20,11 +20,11 @@
                     <th>Type</th>
                     <th>Modify</th>
                   </tr>
-                  <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-success">user</span></td>
+                  <tr v-for="user in users" :key='user.id'>
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.type}}</td>
                     <td>
                         <a href="#">
                             <i class="fa fa-edit blue"></i>
@@ -116,6 +116,7 @@
     export default {
         data () {
           return {
+            users:{},
             // Create a new form instance
             form: new Form({
               name: '',
@@ -133,10 +134,14 @@
             // Submit the form via a POST request
                 this.form.post('api/user') // route name in api routes
                   .then(({ data }) => { console.log(data) })
+          },
+          allUsers(){
+            axios.get('api/user').then( ({data}) =>  (this.users = data.data) );
           }
+
+        },        
+        created(){
+          this.allUsers();
         },
-        mounted() {
-            console.log('Component mounted.')
-        }
     }
 </script>

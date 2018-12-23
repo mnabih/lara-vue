@@ -46,6 +46,16 @@ Vue.filter('formate', function (value) {
   return moment(value).format("MMM Do YY");
 })
 
+import VueProgressBar from 'vue-progressbar'
+
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '4px'
+})
+
+
+
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.

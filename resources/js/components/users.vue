@@ -134,8 +134,12 @@
         methods:{
           addUser(){
             // Submit the form via a POST request
+
+                this.$Progress.start()
                 this.form.post('api/user') // route name in api routes
                   .then(({ data }) => { console.log(data) })
+
+                this.$Progress.finish()
           },
           allUsers(){
             axios.get('api/user').then( ({data}) =>  (this.users = data.data) );

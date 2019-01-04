@@ -32,7 +32,7 @@
                             <i class="fa fa-edit blue"></i>
                         </a>
                         /
-                        <a href="#">
+                        <a href="#" @click="deleteUser(user.id)">
                             <i class="fa fa-trash red"></i>
                         </a>
                     </td>
@@ -132,6 +132,40 @@
           }
         },
         methods:{
+          deleteUser(id){
+            Swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+
+
+                    if (result.value) { // mean if press ok on alert
+
+                      // send request to database
+                      this.form.delete('api/user/' + id)
+
+                      Swal(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                      )
+                      // resend users request for update users after delete
+                      Fire.$emit('afterCreate');
+
+                    }
+                  }).catch(()=>{
+                      Swal(
+                        'error!',
+                        'Your file has not been deleted.',
+                          'fail'
+                      )
+                  })
+          },
           addUser(){
             // Submit the form via a POST request
 

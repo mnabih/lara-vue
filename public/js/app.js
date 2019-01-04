@@ -2019,15 +2019,40 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    addUser: function addUser() {
+    deleteUser: function deleteUser(id) {
       var _this = this;
+
+      Swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          // mean if press ok on alert
+          // send request to database
+          _this.form.delete('api/user/' + id);
+
+          Swal('Deleted!', 'Your file has been deleted.', 'success'); // resend users request for update users after delete
+
+          Fire.$emit('afterCreate');
+        }
+      }).catch(function () {
+        Swal('error!', 'Your file has not been deleted.', 'fail');
+      });
+    },
+    addUser: function addUser() {
+      var _this2 = this;
 
       // Submit the form via a POST request
       this.$Progress.start();
       this.form.post('api/user') // route name in api routes
       // if validation success
       .then(function () {
-        _this.$Progress.finish();
+        _this2.$Progress.finish();
 
         toast({
           type: 'success',
@@ -2040,21 +2065,21 @@ __webpack_require__.r(__webpack_exports__);
       .catch(function () {});
     },
     allUsers: function allUsers() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('api/user').then(function (_ref) {
         var data = _ref.data;
-        return _this2.users = data.data;
+        return _this3.users = data.data;
       });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.allUsers(); //setInterval(()=>this.allUsers(), 3000); //send request every 3 secounds
 
     Fire.$on('afterCreate', function () {
-      _this3.allUsers();
+      _this4.allUsers();
     });
   }
 });
@@ -57787,7 +57812,22 @@ var render = function() {
                         _vm._v(_vm._s(_vm._f("formate")(user.created_at)))
                       ]),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      _c("td", [
+                        _vm._m(2, true),
+                        _vm._v("\n                    /\n                    "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                _vm.deleteUser(user.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-trash red" })]
+                        )
+                      ])
                     ])
                   })
                 ],
@@ -58108,14 +58148,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fa fa-edit blue" })
-      ]),
-      _vm._v("\n                    /\n                    "),
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fa fa-trash red" })
-      ])
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fa fa-edit blue" })
     ])
   },
   function() {

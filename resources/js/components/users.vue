@@ -54,7 +54,8 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+                <h5 v-show="!editMode" class="modal-title" id="exampleModalLabel">New User</h5>
+                <h5 v-show="editMode" class="modal-title" id="exampleModalLabel">Edit User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -104,8 +105,9 @@
                   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button v-show="!editMode" type="submit" class="btn btn-primary"> Create</button>
+                  <button v-show="editMode" type="submit" class="btn btn-success"> Update</button>
                 </div>
               </form>
             </div>
@@ -118,6 +120,7 @@
     export default {
         data () {
           return {
+            editMode:true,
             users:{},
             // Create a new form instance
             form: new Form({
@@ -133,6 +136,7 @@
         },
         methods:{
           editModal(user){
+            this.editMode = true
 
             this.form.reset()
             $('#exampleModal').modal('show')
@@ -140,6 +144,7 @@
 
           },
           newModal(){
+            this.editMode = false
 
             this.form.reset()
             $('#exampleModal').modal('show')

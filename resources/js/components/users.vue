@@ -61,7 +61,7 @@
                 </button>
               </div>
 
-              <form @submit.prevent="addUser">
+              <form @submit.prevent="editMode?updateUser():addUser()">
                 <div class="modal-body">
                     <!-- Bootstrap 4 -->
                     <div class="form-group">
@@ -124,6 +124,7 @@
             users:{},
             // Create a new form instance
             form: new Form({
+              id:'',
               name: '',
               email: '',
               type: '',
@@ -209,6 +210,37 @@
                       // if erorrs
                     .catch( () => { 
 
+                    })
+
+                
+          },
+
+          updateUser(){
+            // Submit the form via a POST request
+
+                this.$Progress.start()
+                this.form.put('api/user/' + this.form.id) // route name in api routes
+                                                          // need user id
+                   
+                   // if validation success
+                  .then( () => { 
+                      this.$Progress.finish()
+                      toast({
+                          type: 'success',
+                          title: 'User Updated successfully'
+                        })
+
+                      $('#exampleModal').modal('hide')
+                      Fire.$emit('afterCreate');
+
+                      // mine
+                      //this.allUsers() // it works put Events are good for informing other components﻿
+
+                     })
+
+                      // if erorrs
+                    .catch( () => { 
+                      this.$Progress.fail()
                     })
 
                 

@@ -2011,6 +2011,7 @@ __webpack_require__.r(__webpack_exports__);
       users: {},
       // Create a new form instance
       form: new Form({
+        id: '',
         name: '',
         email: '',
         type: '',
@@ -2078,22 +2079,45 @@ __webpack_require__.r(__webpack_exports__);
       }) // if erorrs
       .catch(function () {});
     },
-    allUsers: function allUsers() {
+    updateUser: function updateUser() {
       var _this3 = this;
+
+      // Submit the form via a POST request
+      this.$Progress.start();
+      this.form.put('api/user/' + this.form.id) // route name in api routes
+      // need user id
+      // if validation success
+      .then(function () {
+        _this3.$Progress.finish();
+
+        toast({
+          type: 'success',
+          title: 'User Updated successfully'
+        });
+        $('#exampleModal').modal('hide');
+        Fire.$emit('afterCreate'); // mine
+        //this.allUsers() // it works put Events are good for informing other components﻿
+      }) // if erorrs
+      .catch(function () {
+        _this3.$Progress.fail();
+      });
+    },
+    allUsers: function allUsers() {
+      var _this4 = this;
 
       axios.get('api/user').then(function (_ref) {
         var data = _ref.data;
-        return _this3.users = data.data;
+        return _this4.users = data.data;
       });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.allUsers(); //setInterval(()=>this.allUsers(), 3000); //send request every 3 secounds
 
     Fire.$on('afterCreate', function () {
-      _this4.allUsers();
+      _this5.allUsers();
     });
   }
 });
@@ -57939,7 +57963,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.addUser($event)
+                      _vm.editMode ? _vm.updateUser() : _vm.addUser()
                     }
                   }
                 },

@@ -44,7 +44,8 @@
               </div>
 
                 <div class="card-footer">
-                  <pagination :data="users" @pagination-change-page="getResults"></pagination>
+                  <pagination :data="users" @pagination-change-page="getResults" style=""></pagination>
+                  <a href="#" @click.prevent="printMe" target="_blank" style="" class="btn btn-primary float-right"><i class="fa fa-print">Print </i></a>
                 </div>
               
               <!-- /.card-body -->
@@ -144,6 +145,9 @@
           }
         },
         methods:{
+          printMe(){
+            window.print();
+          },
           getResults(page = 1) {
             axios.get('api/user?page=' + page)
               .then(response => {

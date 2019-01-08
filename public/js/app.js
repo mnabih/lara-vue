@@ -2012,6 +2012,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2031,6 +2032,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    printMe: function printMe() {
+      window.print();
+    },
     getResults: function getResults() {
       var _this = this;
 
@@ -59232,7 +59236,22 @@ var render = function() {
               _c("pagination", {
                 attrs: { data: _vm.users },
                 on: { "pagination-change-page": _vm.getResults }
-              })
+              }),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  attrs: { href: "#", target: "_blank" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.printMe($event)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-print" }, [_vm._v("Print ")])]
+              )
             ],
             1
           )
@@ -73640,7 +73659,12 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app',
-  router: router
+  router: router,
+  methods: {
+    printMe: function printMe() {
+      window.print();
+    }
+  }
 });
 
 /***/ }),

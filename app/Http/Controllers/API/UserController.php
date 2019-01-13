@@ -65,6 +65,12 @@ class UserController extends Controller
         return auth('api')->user();
     }
 
+    public function updateInfo(Request $request){
+        $user = auth('api')->user();
+
+        return $request->all();
+    }
+
     /**
      * Update the specified resource in storage.
      *

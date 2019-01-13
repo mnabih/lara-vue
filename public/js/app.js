@@ -2826,6 +2826,9 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       reader.readAsDataURL(file);
+    },
+    updateInfo: function updateInfo() {
+      this.form.put('api/profile').then(function () {}).catch(function () {});
     } // getProfilePhoto(){
     //     let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;
     //     return photo;
@@ -62128,6 +62131,7 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
+                                return _vm.updateInfo($event)
                               }
                             }
                           },

@@ -121,7 +121,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-12">
-                                    <button @click.prevent="" type="submit" class="btn btn-success">Update</button>
+                                    <button @click.prevent="updateInfo" type="submit" class="btn btn-success">Update</button>
                                     </div>
                                 </div>
                                 </form>
@@ -172,6 +172,12 @@
 
                   }
                   reader.readAsDataURL(file);
+            },
+
+            updateInfo(){
+                this.form.put('api/profile')
+                .then(()=>{})
+                .catch(()=>{})
             }
 
             // getProfilePhoto(){

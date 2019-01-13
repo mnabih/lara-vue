@@ -2812,7 +2812,21 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     console.log('Component mounted.');
   },
-  methods: {// getProfilePhoto(){
+  methods: {
+    profileUpdate: function profileUpdate(element) {
+      var _this = this;
+
+      var file = element.target.files[0]; //console.log(file);
+
+      var reader = new FileReader();
+
+      reader.onloadend = function (file) {
+        //console.log('RESULT', reader.result)
+        _this.form.photo = reader.result;
+      };
+
+      reader.readAsDataURL(file);
+    } // getProfilePhoto(){
     //     let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;
     //     return photo;
     // },
@@ -2847,13 +2861,14 @@ __webpack_require__.r(__webpack_exports__);
     //     }
     //     reader.readAsDataURL(file);
     // }
+
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get("api/profile").then(function (_ref) {
       var data = _ref.data;
-      return _this.form.fill(data);
+      return _this2.form.fill(data);
     }); //console.log(data);
   }
 });
@@ -62096,7 +62111,7 @@ var render = function() {
                         _c("input", {
                           staticClass: "form-input",
                           attrs: { type: "file", name: "photo" },
-                          on: { change: function($event) {} }
+                          on: { change: _vm.profileUpdate }
                         })
                       ])
                     ]),

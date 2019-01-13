@@ -100,7 +100,7 @@
                                 <div class="form-group">
                                     <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
                                     <div class="col-sm-12">
-                                        <input type="file" @change="" name="photo" class="form-input">
+                                        <input type="file" @change="profileUpdate" name="photo" class="form-input">
                                     </div>
 
                                 </div>
@@ -161,6 +161,18 @@
         },
 
         methods:{
+
+            profileUpdate(element){
+                var file = element.target.files[0];
+                //console.log(file);
+                  var reader = new FileReader();
+                  reader.onloadend = (file) => {
+                    //console.log('RESULT', reader.result)
+                    this.form.photo = reader.result;
+
+                  }
+                  reader.readAsDataURL(file);
+            }
 
             // getProfilePhoto(){
 

@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    public function __constract(){
-
+    public function __construct()
+    {
         $this->middleware('auth:api');
     }
     /**
@@ -58,6 +58,11 @@ class UserController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function profile()
+    {
+        return auth('api')->user();
     }
 
     /**

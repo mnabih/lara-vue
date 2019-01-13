@@ -91,7 +91,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </router-link>
           </li>
-
+          
+          <li class="nav-item">
+            <router-link to="/passport" href="#" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Passport
+              </p>
+            </router-link>
+          </li>
 
 
             

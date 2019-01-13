@@ -20,6 +20,7 @@ import VueRouter from 'vue-router'
 import dashboardPage from './components/dashboard.vue'
 import profilePage from './components/profile.vue'
 import usersPage from './components/users.vue'
+import passport from './components/passport.vue'
 
 Vue.use(VueRouter)
 
@@ -27,7 +28,8 @@ Vue.use(VueRouter)
 let routes = [
   { path: '/dashboard', component: dashboardPage },
   { path: '/profile', component: profilePage },
-  { path: '/users', component: usersPage }
+  { path: '/users', component: usersPage },
+  { path: '/passport', component: passport }
 ]
 
 const router = new VueRouter({
@@ -71,6 +73,24 @@ window.Fire = new Vue();
 
 
 Vue.component('pagination', require('laravel-vue-pagination'));
+
+
+
+// passport 
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
 
 
 // 4. Create and mount the root instance.
